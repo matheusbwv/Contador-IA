@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Pacientes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Seleção de Unidade -->
+    <div id="unitSelection" class="min-h-screen bg-background flex items-center justify-center p-4">
+        <div class="card w-full max-w-md">
+            <div class="card-header text-center">
+                <h1 class="text-2xl font-bold text-primary">Contador de Pacientes</h1>
+                <p class="text-muted-foreground">Selecione sua unidade</p>
+            </div>
+            <div class="card-content space-y-4">
+                <select id="unitSelect" class="select w-full">
+                    <option value="">Escolha sua unidade</option>
+                    <option value="1">Unidade 01 - Central, Juazeiro do Norte</option>
+                    <option value="3">Unidade 03 - Crato</option>
+                    <option value="5">Unidade 05 - Novo Juazeiro</option>
+                    <option value="6">Unidade 06 - Milagres</option>
+                    <option value="9">Unidade 09 - Barros</option>
+                    <option value="10">Unidade 10 - Office Cariri</option>
+                    <option value="12">Unidade 12 - Caririaçu</option>
+                    <option value="13">Unidade 13 - Campos Sales</option>
+                    <option value="14">Unidade 14 - Nova Olinda</option>
+                    <option value="23">Unidade 23 - Salesiano</option>
+                    <option value="62">Unidade 62 - Clemir Arrais</option>
+                    <option value="88">Unidade 88 - Unicardio</option>
+                    <option value="95">Unidade 95 - Araripe</option>
+                    <option value="97">Unidade 97 - Endoclinic</option>
+                </select>
+                <button id="confirmUnitBtn" class="btn btn-primary w-full" disabled>Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interface Principal -->
+    <div id="mainInterface" class="hidden min-h-screen bg-background p-4">
+        <div class="container max-w-6xl mx-auto space-y-6">
+            <!-- Cabeçalho -->
+            <div class="card">
+                <div class="card-content text-center p-6">
+                    <h1 class="text-3xl font-bold text-primary">Contador de Pacientes</h1>
+                    <p id="selectedUnitDisplay" class="text-muted-foreground mt-2"></p>
+                    <div class="text-4xl font-bold text-primary mt-4">
+                        <span id="counterDisplay">0</span>
+                    </div>
+                    <button id="changeUnitBtn" class="btn btn-outline mt-4">Trocar Unidade</button>
+                </div>
+            </div>
+
+            <!-- Botão de Entrada -->
+            <div id="entrySection" class="text-center">
+                <button id="entryBtn" class="btn btn-primary btn-lg">Nova Entrada</button>
+            </div>
+
+            <!-- Seleção de Senha -->
+            <div id="passwordSection" class="hidden card">
+                <div class="card-header">
+                    <h3 class="card-title">Tipo de Senha</h3>
+                </div>
+                <div class="card-content grid grid-cols-2 gap-4">
+                    <button class="btn btn-password-with password-btn" data-password="Com Senha">Com Senha</button>
+                    <button class="btn btn-password-without password-btn" data-password="Sem Senha">Sem Senha</button>
+                </div>
+            </div>
+
+            <!-- Seleção de Tipo de Atendimento -->
+            <div id="serviceSection" class="hidden card">
+                <div class="card-header">
+                    <h3 class="card-title">Tipo de Atendimento</h3>
+                </div>
+                <div class="card-content grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <button class="btn btn-outline service-btn" data-service="Orçamento exame">Orçamento exame</button>
+                    <button class="btn btn-outline service-btn" data-service="Orçamento vacina">Orçamento vacina</button>
+                    <button class="btn btn-outline service-btn" data-service="Resultado">Resultado</button>
+                    <button class="btn btn-outline service-btn" data-service="Aplicação de vacina">Aplicação de vacina</button>
+                    <button class="btn btn-outline service-btn" data-service="Coleta a domicilio">Coleta a domicilio</button>
+                    <button class="btn btn-outline service-btn" data-service="Coleta na unidade">Coleta na unidade</button>
+                    <button class="btn btn-outline service-btn" data-service="Cadastro de paciente">Cadastro de paciente</button>
+                    <button class="btn btn-outline service-btn" data-service="Entrega de Material">Entrega de Material</button>
+                    <button class="btn btn-outline service-btn" data-service="Outro motivo">Outro motivo</button>
+                    <button class="btn btn-outline service-btn" data-service="Informações Gerais">Informações Gerais</button>
+                    <button class="btn btn-outline service-btn" data-service="Informações vacinas">Informações vacinas</button>
+                    <button class="btn btn-outline service-btn" data-service="Informações exames">Informações exames</button>
+                    <button class="btn btn-outline service-btn" data-service="Toxicológico">Toxicológico</button>
+                    <button class="btn btn-outline service-btn" data-service="Não atendido">Não atendido</button>
+                </div>
+            </div>
+
+            <!-- Tabela de Pacientes -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Registro de Atendimentos</h3>
+                </div>
+                <div class="card-content">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nº</th>
+                                    <th>Unidade</th>
+                                    <th>Tipo</th>
+                                    <th>Senha</th>
+                                    <th>Hora</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recordsTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="noRecords" class="text-center text-muted-foreground py-8">
+                        Nenhum atendimento registrado ainda.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão de Envio -->
+            <div id="submitSection" class="hidden text-center">
+                <button id="submitBtn" class="btn btn-success btn-lg">Enviar Dados Pendentes</button>
+                <div id="submitLoading" class="hidden mt-4">
+                    <div class="spinner"></div>
+                    <p class="text-muted-foreground">Enviando dados...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Editar Atendimento</h3>
+                <button id="closeModalBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body space-y-4">
+                <div>
+                    <label for="editTipoAtendimento">Tipo de Atendimento</label>
+                    <select id="editTipoAtendimento" class="select w-full">
+                        <option value="Orçamento exame">Orçamento exame</option>
+                        <option value="Orçamento vacina">Orçamento vacina</option>
+                        <option value="Resultado">Resultado</option>
+                        <option value="Aplicação de vacina">Aplicação de vacina</option>
+                        <option value="Coleta a domicilio">Coleta a domicilio</option>
+                        <option value="Coleta na unidade">Coleta na unidade</option>
+                        <option value="Cadastro de paciente">Cadastro de paciente</option>
+                        <option value="Entrega de Material">Entrega de Material</option>
+                        <option value="Outro motivo">Outro motivo</option>
+                        <option value="Informações Gerais">Informações Gerais</option>
+                        <option value="Informações vacinas">Informações vacinas</option>
+                        <option value="Informações exames">Informações exames</option>
+                        <option value="Toxicológico">Toxicológico</option>
+                        <option value="Não atendido">Não atendido</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="editSenha">Tipo de Senha</label>
+                    <select id="editSenha" class="select w-full">
+                        <option value="Com Senha">Com Senha</option>
+                        <option value="Sem Senha">Sem Senha</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="editHora">Hora</label>
+                    <input id="editHora" type="time" class="input w-full">
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
+                    <div>
+                        <label class="text-xs">Unidade:</label>
+                        <p id="editUnidade"></p>
+                    </div>
+                    <div>
+                        <label class="text-xs">Data:</label>
+                        <p id="editData"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelEditBtn" class="btn btn-outline">Cancelar</button>
+                <button id="saveEditBtn" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
