@@ -234,6 +234,18 @@ body {
     background-color: #b91c1c;
 }
 
+/* Botão específico para "Não atendido" */
+.service-btn[data-service="Não atendido"] {
+    background-color: #dc2626;
+    color: white;
+    border-color: #dc2626;
+}
+
+.service-btn[data-service="Não atendido"]:hover:not(:disabled) {
+    background-color: #b91c1c;
+    border-color: #b91c1c;
+}
+
 .btn-lg {
     padding: 1rem 2.5rem;
     font-size: 1rem;

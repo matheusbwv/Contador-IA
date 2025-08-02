@@ -87,7 +87,7 @@
                     <button class="btn btn-outline service-btn" data-service="Informações vacinas">Informações vacinas</button>
                     <button class="btn btn-outline service-btn" data-service="Informações exames">Informações exames</button>
                     <button class="btn btn-outline service-btn" data-service="Toxicológico">Toxicológico</button>
-                    <button class="btn btn-outline service-btn" data-service="Não atendido">Não atendido</button>
+                    <button class="btn btn-outline-danger service-btn" data-service="Não atendido">Não atendido</button>
                 </div>
             </div>
 
@@ -165,9 +165,11 @@
                         <option value="Sem Senha">Sem Senha</option>
                     </select>
                 </div>
-                <div>
-                    <label for="editHora">Hora</label>
-                    <input id="editHora" type="time" class="input w-full">
+                <div class="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
+                    <div>
+                        <label class="text-xs">Hora:</label>
+                        <p id="editHoraDisplay"></p>
+                    </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
                     <div>

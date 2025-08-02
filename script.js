@@ -230,7 +230,7 @@ function editRecord(id) {
     // Preencher o modal
     document.getElementById('editTipoAtendimento').value = record.tipoAtendimento;
     document.getElementById('editSenha').value = record.senha;
-    document.getElementById('editHora').value = record.hora.slice(0, 5); // Remove seconds
+    document.getElementById('editHoraDisplay').textContent = record.hora;
     document.getElementById('editUnidade').textContent = record.unidade;
     document.getElementById('editData').textContent = record.data;
     
@@ -250,8 +250,7 @@ function saveEditRecord() {
     
     const updatedData = {
         tipoAtendimento: document.getElementById('editTipoAtendimento').value,
-        senha: document.getElementById('editSenha').value,
-        hora: document.getElementById('editHora').value + ':00'
+        senha: document.getElementById('editSenha').value
     };
     
     records[recordIndex] = { ...records[recordIndex], ...updatedData };
